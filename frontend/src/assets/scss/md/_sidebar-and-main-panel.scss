@@ -274,20 +274,24 @@
     }
 
     &[data-color="blue"]{
-        @include set-background-color-button($brand-info);
+      @include set-background-color-button(rgba($brand-info, 0.7));
     }
+    
     &[data-color="green"]{
-        @include set-background-color-button($brand-success);
+      @include set-background-color-button(rgba($brand-success, 0.8));
     }
+    
     &[data-color="orange"]{
-        @include set-background-color-button($brand-warning);
+      @include set-background-color-button(rgba($brand-warning, 0.7));
     }
+    
     &[data-color="red"]{
-        @include set-background-color-button($brand-danger);
+      @include set-background-color-button(rgba($brand-danger, 0.6));
     }
+    
     &[data-color="purple"]{
-        @include set-background-color-button($brand-primary);
-    }
+      @include set-background-color-button(rgba($brand-primary, 0.7));
+    }    
 }
 
 .off-canvas-sidebar{
