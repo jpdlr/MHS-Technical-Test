@@ -111,15 +111,11 @@ export default {
   /* margins in between buttons */
   margin-left: 10px;
   margin-right: 10px;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 .custom-calendar .fc-header-toolbar .fc-button:hover {
   background-color: darkgray;
   color: white;
-}
-
-.md-theme-default a:not(.md-button) {
-  color: black !important;
 }
 </style>

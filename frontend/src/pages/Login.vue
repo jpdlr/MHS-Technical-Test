@@ -3,11 +3,17 @@
     <img src="@/assets/img/logo.jpg" alt="Logo" class="logo-image" />
     <h1>Groomer Login</h1>
     <form @submit.prevent="login" class="login-form">
-      <div class="form-field">
-        <input type="text" id="email" v-model="username" required placeholder="Email" />
+      <div class="md-layout-item md-small-size-100 md-size-50">
+        <md-field>
+          <label>Email Address</label>
+          <md-input v-model="emailadress" type="email"></md-input>
+        </md-field>
       </div>
-      <div class="form-field">
-        <input type="password" id="password" v-model="password" required placeholder="Password" />
+      <div class="md-layout-item md-small-size-100 md-size-50">
+        <md-field>
+          <label>Password</label>
+          <md-input v-model="emailadress" type="password"></md-input>
+        </md-field>
       </div>
       <div class="form-field">
         <button type="submit" class="login-button">Login</button>
@@ -36,7 +42,8 @@
 }
 
 .logo-image {
-  max-width: 150px; /* Adjust the width as needed */
+  max-width: 150px;
+  /* Adjust the width as needed */
   max-height: 150px;
   margin-bottom: 20px;
   border-radius: 100%;
@@ -67,27 +74,19 @@ label {
   margin-bottom: 10px;
 }
 
-input {
-  padding: 10px;
-  background-color: #d6d6d6;
-  border: 2px solid #bababa;
-  border-radius: 6px;
-  width: 50%;
-}
-
-input:focus {
-  border-color: #007bff;
-}
-
 .login-button {
   margin-top: 50px;
-  width: 50%;
+  width: 48%;
   padding: 10px;
   background-color: #686868;
   color: #fff;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+}
+
+.login-button:hover {
+  background-color: #3b3b3b;
 }
 
 .register-container {
@@ -100,4 +99,9 @@ input:focus {
   border: none;
   cursor: pointer;
 }
+
+.register-button:hover {
+  text-decoration: underline;
+}
+
 </style>
