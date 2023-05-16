@@ -1,62 +1,42 @@
-import DashboardLayout from "@/pages/Layout/DashboardLayout.vue";
+import CalendarLayout from "@/pages/Layout/CalendarLayout.vue";
 
-import Dashboard from "@/pages/Dashboard.vue";
+import Calendar from "@/pages/Calendar.vue";
 import UserProfile from "@/pages/UserProfile.vue";
-import TableList from "@/pages/TableList.vue";
-import Typography from "@/pages/Typography.vue";
-import Icons from "@/pages/Icons.vue";
-import Maps from "@/pages/Maps.vue";
+import CustomerList from "@/pages/CustomerList.vue";
+import PetList from "@/pages/PetList.vue";
 import Notifications from "@/pages/Notifications.vue";
-import UpgradeToPRO from "@/pages/UpgradeToPRO.vue";
 
 const routes = [
   {
     path: "/",
-    component: DashboardLayout,
-    redirect: "/dashboard",
+    component: CalendarLayout,
+    redirect: "/calendar",
     children: [
       {
-        path: "dashboard",
-        name: "Dashboard",
-        component: Dashboard,
+        path: "calendar",
+        name: "Calendar",
+        component: Calendar,
       },
       {
-        path: "user",
-        name: "User Profile",
-        component: UserProfile,
+        path: "customerlist",
+        name: "Customer List",
+        component: CustomerList,
       },
       {
-        path: "table",
-        name: "Table List",
-        component: TableList,
-      },
-      {
-        path: "typography",
-        name: "Typography",
-        component: Typography,
-      },
-      {
-        path: "icons",
-        name: "Icons",
-        component: Icons,
-      },
-      {
-        path: "maps",
-        name: "Maps",
-        meta: {
-          hideFooter: true,
-        },
-        component: Maps,
+        path: "petlist",
+        name: "Pet List",
+        component: PetList,
       },
       {
         path: "notifications",
         name: "Notifications",
         component: Notifications,
       },
+      
       {
-        path: "upgrade",
-        name: "Upgrade to PRO",
-        component: UpgradeToPRO,
+        path: "user",
+        name: "User Profile",
+        component: UserProfile,
       },
     ],
   },
