@@ -7,43 +7,25 @@
       <ul class="dropdown-menu" :class="{ show: isOpen }">
         <li class="header-title">Sidebar Filters</li>
         <li class="adjustments-line text-center">
-          <span
-            v-for="item in sidebarColors"
-            :key="item.color"
-            class="badge filter"
-            :class="[`badge-${item.color}`, { active: item.active }]"
-            :data-color="item.color"
-            @click="changeSidebarBackground(item)"
-          >
+          <span v-for="item in sidebarColors" :key="item.color" class="badge filter"
+            :class="[`badge-${item.color}`, { active: item.active }]" :data-color="item.color"
+            @click="changeSidebarBackground(item)">
           </span>
         </li>
         <li class="header-title">Images</li>
-        <li
-          v-for="item in sidebarImages"
-          :key="item.image"
-          :class="{ active: item.active }"
-          @click="changeSidebarImage(item)"
-        >
+        <li v-for="item in sidebarImages" :key="item.image" :class="{ active: item.active }"
+          @click="changeSidebarImage(item)">
           <a class="img-holder switch-trigger">
             <img :src="item.image" alt="" />
           </a>
         </li>
 
         <li class="button-container">
-          <social-sharing
-            :url="shareUrl"
-            inline-template
-            title="Mountain Hops Software"
-            hashtags="vuejs, dashboard, vuematerial"
-            twitter-user="creativetim"
-          >
+          <social-sharing :url="shareUrl" inline-template title="Mountain Hops Software"
+            hashtags="vuejs, dashboard, vuematerial" twitter-user="creativetim">
             <div class="centered-buttons">
-              <ShareNetwork
-                title=""
-                url="https://mountainhops.co.za/"
-                network="facebook"
-                class="md-button md-round md-just-icon md-facebook"
-              >
+              <ShareNetwork title="" url="https://mountainhops.co.za/" network="facebook"
+                class="md-button md-round md-just-icon md-facebook">
                 <i class="fab fa-facebook-f"></i>
               </ShareNetwork>
             </div>

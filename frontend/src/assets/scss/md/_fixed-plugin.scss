@@ -1,12 +1,12 @@
 .fixed-plugin{
     position: fixed;
     right: 0;
-    width: 64px;
+    width: 48px;
     background: rgba(0,0,0,.3);
     z-index: 1031;
     border-radius: 8px 0 0 8px;
     text-align: center;
-    top: 120px;
+    top: 50px;
 
     li > a,
     .badge{
@@ -17,7 +17,7 @@
 
     .fa-cog{
         color: #FFFFFF;
-        padding: 10px;
+        padding: 8px;
         border-radius: 0 0 6px 6px;
         width: auto;
     }
