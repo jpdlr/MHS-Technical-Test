@@ -4,7 +4,6 @@ import Calendar from "@/pages/Calendar.vue";
 import UserProfile from "@/pages/UserProfile.vue";
 import CustomerList from "@/pages/CustomerList.vue";
 import PetList from "@/pages/PetList.vue";
-import Notifications from "@/pages/Notifications.vue";
 
 const routes = [
   {
@@ -26,13 +25,7 @@ const routes = [
         path: "petlist",
         name: "Pet List",
         component: PetList,
-      },
-      {
-        path: "notifications",
-        name: "Notifications",
-        component: Notifications,
-      },
-      
+      },      
       {
         path: "user",
         name: "User Profile",
