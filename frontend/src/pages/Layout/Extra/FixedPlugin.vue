@@ -58,6 +58,7 @@ import Vue from "vue";
 import SocialSharing from "vue-social-sharing";
 import VueGitHubButtons from "vue-github-buttons";
 import "vue-github-buttons/dist/vue-github-buttons.css";
+import store from "@/store";
 
 Vue.use(SocialSharing);
 Vue.use(VueGitHubButtons, { useCache: true });
@@ -102,7 +103,7 @@ export default {
       this.$emit(`update:${name}`, val);
     },
     changeSidebarBackground(item) {
-      this.$emit("update:color", item.color);
+      store.commit('setSidebarColor', item.color);
       this.toggleList(this.sidebarColors, item);
     },
     changeSidebarImage(item) {

@@ -1,7 +1,7 @@
 <template>
   <form>
     <md-card>
-      <md-card-header :data-background-color="dataBackgroundColor">
+      <md-card-header :data-background-color="sidebarBackground">
         <h4 class="title">Edit Profile</h4>
         <p class="category">Complete your profile</p>
       </md-card-header>
@@ -46,15 +46,12 @@
     </md-card>
   </form>
 </template>
+
 <script>
+import store from "@/store.js"; 
+
 export default {
   name: "edit-profile-form",
-  props: {
-    dataBackgroundColor: {
-      type: String,
-      default: "",
-    },
-  },
   data() {
     return {
       disabled: null,
@@ -62,9 +59,26 @@ export default {
       lastname: null,
       firstname: null,
       contactNo: null,
+      sidebarBackground: "", // Initialize as empty string
       aboutme:
         "I'm THE groomer. The one and only. I'm the best groomer in the world.",
     };
+  },
+  created() {
+    eventBus.$on("colorChanged", (color) => {
+      store.commit("setSidebarColor", color); // Update the color in the Vuex store
+    });
+  },
+  mounted() {
+    this.sidebarBackground = store.state.sidebarColor; // Set the initial value from the Vuex store
+
+    // Watch for changes in the sidebarColor Vuex store and update sidebarBackground accordingly
+    this.$watch(
+      () => store.state.sidebarColor,
+      (newColor) => {
+        this.sidebarBackground = newColor;
+      }
+    );
   },
 };
 </script>

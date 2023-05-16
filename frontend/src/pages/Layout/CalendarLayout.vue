@@ -2,10 +2,7 @@
   <div class="wrapper" :class="{ 'nav-open': $sidebar.showSidebar }">
     <notifications></notifications>
 
-    <side-bar
-      :sidebar-item-color="sidebarBackground"
-      :sidebar-background-image="sidebarBackgroundImage"
-    >
+    <side-bar :sidebar-item-color="sidebarBackground" :sidebar-background-image="sidebarBackgroundImage">
       <mobile-menu slot="content"></mobile-menu>
       <sidebar-link to="/calendar">
         <md-icon>today</md-icon>
@@ -28,10 +25,7 @@
     <div class="main-panel">
       <top-navbar></top-navbar>
 
-      <fixed-plugin
-        :color.sync="sidebarBackground"
-        :image.sync="sidebarBackgroundImage"
-      >
+      <fixed-plugin :color.sync="sidebarBackground" :image.sync="sidebarBackgroundImage">
       </fixed-plugin>
 
       <dashboard-content> </dashboard-content>
@@ -47,6 +41,7 @@ import ContentFooter from "./ContentFooter.vue";
 import DashboardContent from "./Content.vue";
 import MobileMenu from "@/pages/Layout/MobileMenu.vue";
 import FixedPlugin from "./Extra/FixedPlugin.vue";
+import store from "@/store";
 
 export default {
   components: {
@@ -58,9 +53,25 @@ export default {
   },
   data() {
     return {
-      sidebarBackground: "green",
+      sidebarBackground: "",
       sidebarBackgroundImage: require("@/assets/img/sidebar-2.jpg"),
     };
+  },
+  created() {
+    eventBus.$on("colorChanged", (color) => {
+      store.commit("setSidebarColor", color); // Update the color in the Vuex store
+    });
+  },
+  mounted() {
+    this.sidebarBackground = store.state.sidebarColor; // Set the initial value from the Vuex store
+
+    // Watch for changes in the sidebarColor Vuex store and update sidebarBackground accordingly
+    this.$watch(
+      () => store.state.sidebarColor,
+      (newColor) => {
+        this.sidebarBackground = newColor;
+      }
+    );
   },
 };
 </script>
