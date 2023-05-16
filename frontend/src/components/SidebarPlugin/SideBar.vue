@@ -16,7 +16,7 @@
         href="#/calendar"
         target="_self"
         class="simple-text logo-normal"
-        style="font-size: 1.3em;"
+        style="font-size: 1.3em"
       >
         {{ title }}
       </a>

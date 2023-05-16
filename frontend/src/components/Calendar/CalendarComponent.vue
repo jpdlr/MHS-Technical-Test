@@ -1,121 +1,125 @@
 <script>
-import FullCalendar from '@fullcalendar/vue'
-import dayGridPlugin from '@fullcalendar/daygrid'
-import timeGridPlugin from '@fullcalendar/timegrid'
-import interactionPlugin from '@fullcalendar/interaction'
-import { INITIAL_EVENTS, createEventId } from './event-utils'
-
+import FullCalendar from "@fullcalendar/vue";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import { INITIAL_EVENTS, createEventId } from "./event-utils";
 
 export default {
+  components: {
+    FullCalendar, // make the <FullCalendar> tag available
+  },
 
-    components: {
-        FullCalendar // make the <FullCalendar> tag available
-    },
-
-    data: function () {
-        return {
-            calendarOptions: {
-                plugins: [
-                    dayGridPlugin,
-                    timeGridPlugin,
-                    interactionPlugin // needed for dateClick
-                ],
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                },
-                initialView: 'dayGridMonth',
-                initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
-                editable: true,
-                selectable: true,
-                selectMirror: true,
-                dayMaxEvents: true,
-                weekends: true,
-                select: this.handleDateSelect,
-                eventClick: this.handleEventClick,
-                eventsSet: this.handleEvents
-                /* you can update a remote database when these fire:
+  data: function () {
+    return {
+      calendarOptions: {
+        plugins: [
+          dayGridPlugin,
+          timeGridPlugin,
+          interactionPlugin, // needed for dateClick
+        ],
+        headerToolbar: {
+          left: "prev,next today",
+          center: "title",
+          right: "dayGridMonth,timeGridWeek,timeGridDay",
+        },
+        initialView: "dayGridMonth",
+        initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
+        editable: true,
+        selectable: true,
+        selectMirror: true,
+        dayMaxEvents: true,
+        weekends: true,
+        select: this.handleDateSelect,
+        eventClick: this.handleEventClick,
+        eventsSet: this.handleEvents,
+        /* you can update a remote database when these fire:
                 eventAdd:
                 eventChange:
                 eventRemove:
                 */
-            },
-            currentEvents: []
-        }
+      },
+      currentEvents: [],
+    };
+  },
+
+  methods: {
+    handleWeekendsToggle() {
+      this.calendarOptions.weekends = !this.calendarOptions.weekends; // update a property
     },
 
-    methods: {
+    handleDateSelect(selectInfo) {
+      let title = prompt("Please enter a new title for your event");
+      let calendarApi = selectInfo.view.calendar;
 
-        handleWeekendsToggle() {
-            this.calendarOptions.weekends = !this.calendarOptions.weekends // update a property
-        },
+      calendarApi.unselect(); // clear date selection
 
-        handleDateSelect(selectInfo) {
-            let title = prompt('Please enter a new title for your event')
-            let calendarApi = selectInfo.view.calendar
+      if (title) {
+        calendarApi.addEvent({
+          id: createEventId(),
+          title,
+          start: selectInfo.startStr,
+          end: selectInfo.endStr,
+          allDay: selectInfo.allDay,
+        });
+      }
+    },
 
-            calendarApi.unselect() // clear date selection
+    handleEventClick(clickInfo) {
+      if (
+        confirm(
+          `Are you sure you want to delete the event '${clickInfo.event.title}'`
+        )
+      ) {
+        clickInfo.event.remove();
+      }
+    },
 
-            if (title) {
-                calendarApi.addEvent({
-                    id: createEventId(),
-                    title,
-                    start: selectInfo.startStr,
-                    end: selectInfo.endStr,
-                    allDay: selectInfo.allDay
-                })
-            }
-        },
-
-        handleEventClick(clickInfo) {
-            if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-                clickInfo.event.remove()
-            }
-        },
-
-        handleEvents(events) {
-            this.currentEvents = events
-        }
-    }
-}
+    handleEvents(events) {
+      this.currentEvents = events;
+    },
+  },
+};
 </script>
 
 <template>
-    <div class='calendar-div'>
-        <FullCalendar class="calendar-component custom-calendar" :options="calendarOptions">
-            <template v-slot:eventContent='arg'>
-                <b>{{ arg.timeText }}</b>
-                <i>{{ arg.event.title }}</i>
-            </template>
-        </FullCalendar>
-    </div>
+  <div class="calendar-div">
+    <FullCalendar
+      class="calendar-component custom-calendar"
+      :options="calendarOptions"
+    >
+      <template v-slot:eventContent="arg">
+        <b>{{ arg.timeText }}</b>
+        <i>{{ arg.event.title }}</i>
+      </template>
+    </FullCalendar>
+  </div>
 </template>
 
-<style lang='css'>
+<style lang="css">
 .calendar-div {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 .calendar-component {
-    color: black;
+  color: black;
 }
 
 .custom-calendar .fc-header-toolbar .fc-button {
-    background-color: black;
-    color: white;
-    /* margins in between buttons */
-    margin-left: 10px;
-    margin-right: 10px;
-    border-radius: 8px;
+  background-color: black;
+  color: white;
+  /* margins in between buttons */
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 8px;
 }
 
 .custom-calendar .fc-header-toolbar .fc-button:hover {
-    background-color: darkgray;
-    color: white;
+  background-color: darkgray;
+  color: white;
 }
 
-.md-theme-default a:not(.md-button){
+.md-theme-default a:not(.md-button) {
   color: black !important;
 }
 </style>

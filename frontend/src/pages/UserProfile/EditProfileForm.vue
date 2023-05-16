@@ -32,16 +32,16 @@
               <md-input v-model="lastname" type="text"></md-input>
             </md-field>
           </div>
-            <div class="md-layout-item md-size-100">
-              <md-field maxlength="5">
-                <label>About Me</label>
-                <md-textarea v-model="aboutme"></md-textarea>
-              </md-field>
-            </div>
-            <div class="md-layout-item md-size-100 text-right">
-              <md-button class="md-raised md-success">Update Profile</md-button>
-            </div>
+          <div class="md-layout-item md-size-100">
+            <md-field maxlength="5">
+              <label>About Me</label>
+              <md-textarea v-model="aboutme"></md-textarea>
+            </md-field>
           </div>
+          <div class="md-layout-item md-size-100 text-right">
+            <md-button class="md-raised md-success">Update Profile</md-button>
+          </div>
+        </div>
       </md-card-content>
     </md-card>
   </form>
