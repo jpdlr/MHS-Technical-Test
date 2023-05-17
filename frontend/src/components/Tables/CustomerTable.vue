@@ -2,7 +2,6 @@
   <div>
     <md-table v-model="customers" :table-header-color="tableHeaderColor">
       <md-table-row slot="md-table-row" slot-scope="{ item }">
-        <md-table-cell md-label="ID">{{ item.id }}</md-table-cell>
         <md-table-cell md-label="Name">{{ item.customer_name }}</md-table-cell>
         <md-table-cell md-label="Pet Name">{{ item.pet_name }}</md-table-cell>
         <md-table-cell md-label="Email">{{ item.email }}</md-table-cell>
@@ -15,6 +14,10 @@
         </md-table-cell>
       </md-table-row>
     </md-table>
+    <!-- Create customer button -->
+    <div class="md-layout-item md-size-100 text-right">
+      <md-button class="md-raised md-success" @click="createNewCustomer">Create New Customer</md-button>
+    </div>
   </div>
 </template>
 
@@ -58,10 +61,8 @@ export default {
         this.loading = false;
       }
     },
-    async createCustomer() {
-      await api.createCustomer(this.model);
-      this.clearModel();
-      await this.getAll();
+    createNewCustomer() {
+      this.$router.push('/new_customer');
     },
     async deleteCustomer(id) {
       if (confirm("Are you sure you want to delete this record?")) {

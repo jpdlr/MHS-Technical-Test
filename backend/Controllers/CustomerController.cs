@@ -33,6 +33,11 @@ namespace backend.Controllers
         [HttpPost]
         public async Task Post(CustomerRecord model)
         {
+            model.id = Guid.NewGuid().ToString();
+
+            // print out the model to the console
+            Console.WriteLine(model);
+
             await _dbContext.AddAsync(model);
 
             await _dbContext.SaveChangesAsync();
@@ -42,7 +47,7 @@ namespace backend.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> Put(string id, CustomerRecord model)
         {
-            var exists = await _dbContext.CustomerRecords.AnyAsync(f => f.Id == id);
+            var exists = await _dbContext.CustomerRecords.AnyAsync(f => f.id == id);
             if (!exists)
             {
                 return NotFound();

@@ -1,8 +1,8 @@
 import CalendarLayout from "@/pages/Layout/CalendarLayout.vue";
 import Calendar from "@/pages/Calendar.vue";
 import UserProfile from "@/pages/UserProfile.vue";
-import CustomerList from "@/pages/CustomerList.vue";
-import PetList from "@/pages/PetList.vue";
+import CustomerList from "@/pages/Customers/CustomerList.vue";
+import PetList from "@/pages/Pets/PetList.vue";
 import Login from "@/pages/Login.vue";
 
 const routes = [
@@ -40,6 +40,17 @@ const routes = [
     ],
   },
   {
+    path: "/new_customer",
+    component: CalendarLayout,
+    redirect: "/new_customer",
+    children: [
+      {
+        path: "/",
+        component: () => import("@/pages/Customers/NewCustomer.vue"),
+      },
+    ],
+  },
+  {
     path: "/petlist",
     component: CalendarLayout,
     redirect: "/petlist",
@@ -48,6 +59,17 @@ const routes = [
         path: "/",
         name: "Pet List",
         component: PetList,
+      },
+    ],
+  },
+  {
+    path: "/new_pet",
+    component: CalendarLayout,
+    redirect: "/new_pet",
+    children: [
+      {
+        path: "/",
+        component: () => import("@/pages/Pets/NewPet.vue"),
       },
     ],
   },

@@ -2,12 +2,11 @@ namespace backend.Model
 {
     public class PetRecord
     {
-        public string Id { get; set; } = "";
-        public string CustomerName { get; set; } = "";
-        public string PetName { get; set; } = "";
-        public string TagSerialNumber { get; set; } = "";
-        public string Breed { get; set; } = "";
-        public string VisualDescription { get; set; } = "";
-        public string Allergies { get; set; } = "";
+        public string id { get; set; } = "";
+        public string customer_name { get; set; } = "";
+        public string pet_name { get; set; } = "";
+        public string tag_serial_number { get; set; } = "";
+        public string visual_desc { get; set; } = "";
+        public string allergies { get; set; } = "";
     }
 }

@@ -2,13 +2,13 @@ namespace backend.Model
 {
     public class CustomerRecord
     {
-        public string Id { get; set; } = "";
-        public string CustomerName { get; set; } = "";
-        public string PetName { get; set; } = "";
-        public string Email { get; set; } = "";
-        public string ContactNumber { get; set; } = "";
-        public DateTime CustomerSinceDate { get; set; } = DateTime.Now;
-        public string GroomDay { get; set; } = "";
-        public string GroomFrequency { get; set; } = "";
+        public string id { get; set; } = "";
+        public string customer_name { get; set; } = "";
+        public string pet_name { get; set; } = "";
+        public string email { get; set; } = "";
+        public string contactno { get; set; } = "";
+        public DateTime cust_since_date { get; set; } = DateTime.Now;
+        public string groom_day { get; set; } = "";
+        public string groom_frequency { get; set; } = "";
     }
 }

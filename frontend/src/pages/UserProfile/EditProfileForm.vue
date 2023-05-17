@@ -59,7 +59,7 @@ export default {
       lastname: null,
       firstname: null,
       contactNo: null,
-      sidebarBackground: "", // Initialize as empty string
+      sidebarBackground: "",
       aboutme:
         "I'm THE groomer - the one and only. I'm the best groomer in the world.",
     };

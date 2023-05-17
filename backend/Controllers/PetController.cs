@@ -33,6 +33,8 @@ namespace backend.Controllers
         [HttpPost]
         public async Task Post(PetRecord model)
         {
+            model.id = Guid.NewGuid().ToString();
+
             await _dbContext.AddAsync(model);
 
             await _dbContext.SaveChangesAsync();
@@ -42,7 +44,7 @@ namespace backend.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> Put(string id, PetRecord model)
         {
-            var exists = await _dbContext.PetRecords.AnyAsync(f => f.Id == id);
+            var exists = await _dbContext.PetRecords.AnyAsync(f => f.id == id);
             if (!exists)
             {
                 return NotFound();
