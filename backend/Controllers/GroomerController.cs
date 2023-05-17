@@ -4,43 +4,34 @@ using Microsoft.EntityFrameworkCore;
 
 namespace backend.Controllers
 {
-    [Route("api/CustomersList")]
+    [Route("api/register")]
     [ApiController]
-    public class CustomerRecordsController : ControllerBase
+    public class GroomerRecordsController : ControllerBase
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public CustomerRecordsController(ApplicationDbContext dbContext)
+        public GroomerRecordsController(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
         // GET api/CustomerList
         [HttpGet]
-        public async Task<ActionResult<List<CustomerRecord>>> Get()
+        public async Task<ActionResult<List<GroomerRecord>>> Get()
         {
-            return await _dbContext.CustomerRecords.ToListAsync();
+            return await _dbContext.GroomerRecords.ToListAsync();
         }
 
         // GET api/CustomerList/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<CustomerRecord>> Get(string id)
+        public async Task<ActionResult<GroomerRecord>> Get(string id)
         {
-            var customer = await _dbContext.CustomerRecords
-                .Include(c => c.Pets)
-                .FirstOrDefaultAsync(c => c.id == id);
-
-            if (customer == null)
-            {
-                return NotFound();
-            }
-
-            return customer;
+            return await _dbContext.GroomerRecords.FindAsync(id);
         }
 
         // POST api/CustomerList
         [HttpPost]
-        public async Task Post(CustomerRecord model)
+        public async Task Post(GroomerRecord model)
         {
             model.id = Guid.NewGuid().ToString();
 
@@ -54,15 +45,15 @@ namespace backend.Controllers
 
         // PUT api/CustomerList/5
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(string id, CustomerRecord model)
+        public async Task<ActionResult> Put(string id, GroomerRecord model)
         {
-            var exists = await _dbContext.CustomerRecords.AnyAsync(f => f.id == id);
+            var exists = await _dbContext.GroomerRecords.AnyAsync(f => f.id == id);
             if (!exists)
             {
                 return NotFound();
             }
 
-            _dbContext.CustomerRecords.Update(model);
+            _dbContext.GroomerRecords.Update(model);
 
             await _dbContext.SaveChangesAsync();
 
@@ -74,12 +65,12 @@ namespace backend.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(string id)
         {
-            var entity = await _dbContext.CustomerRecords.FindAsync(id);
+            var entity = await _dbContext.GroomerRecords.FindAsync(id);
 
-            _dbContext.CustomerRecords.Remove(entity!);
+            _dbContext.GroomerRecords.Remove(entity);
 
             await _dbContext.SaveChangesAsync();
-
+            
             return Ok();
         }
     }

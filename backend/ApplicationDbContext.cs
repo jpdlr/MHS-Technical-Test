@@ -7,6 +7,7 @@ namespace backend
     {
         public DbSet<CustomerRecord> CustomerRecords { get; set; }
         public DbSet<PetRecord> PetRecords { get; set; }
+        public DbSet<GroomerRecord> GroomerRecords { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
