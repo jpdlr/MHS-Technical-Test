@@ -8,7 +8,7 @@
             <p class="category">A List of all the pets for the groomer</p>
           </md-card-header>
           <md-card-content>
-            <customer-table></customer-table>
+            <pet-table></pet-table>
           </md-card-content>
         </md-card>
       </div>
@@ -17,22 +17,17 @@
 </template>
   
 <script>
-import { CustomerTable } from "@/components";
+import { PetTable } from "@/components";
 import store from "@/store.js"; 
 
 export default {
   components: {
-    CustomerTable,
+    PetTable,
   },
   data() {
     return {
       sidebarBackground: "", // Initialize as empty string
     };
-  },
-  created() {
-    eventBus.$on("colorChanged", (color) => {
-      store.commit("setSidebarColor", color); // Update the color in the Vuex store
-    });
   },
   mounted() {
     this.sidebarBackground = store.state.sidebarColor; // Set the initial value from the Vuex store

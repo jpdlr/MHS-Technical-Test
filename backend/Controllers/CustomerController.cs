@@ -1,0 +1,72 @@
+using backend.Model;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
+namespace backend.Controllers
+{
+    [Route("api/CustomersList")]
+    [ApiController]
+    public class CustomerRecordsController : ControllerBase
+    {
+        private readonly ApplicationDbContext _dbContext;
+
+        public CustomerRecordsController(ApplicationDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
+        // GET api/CustomerList
+        [HttpGet]
+        public async Task<ActionResult<List<CustomerRecord>>> Get()
+        {
+            return await _dbContext.CustomerRecords.ToListAsync();
+        }
+
+        // GET api/CustomerList/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<CustomerRecord>> Get(string id)
+        {
+            return await _dbContext.CustomerRecords.FindAsync(id);
+        }
+
+        // POST api/CustomerList
+        [HttpPost]
+        public async Task Post(CustomerRecord model)
+        {
+            await _dbContext.AddAsync(model);
+
+            await _dbContext.SaveChangesAsync();
+        }
+
+        // PUT api/CustomerList/5
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Put(string id, CustomerRecord model)
+        {
+            var exists = await _dbContext.CustomerRecords.AnyAsync(f => f.Id == id);
+            if (!exists)
+            {
+                return NotFound();
+            }
+
+            _dbContext.CustomerRecords.Update(model);
+
+            await _dbContext.SaveChangesAsync();
+
+            return Ok();
+
+        }
+
+        // DELETE api/CustomerList/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(string id)
+        {
+            var entity = await _dbContext.CustomerRecords.FindAsync(id);
+
+            _dbContext.CustomerRecords.Remove(entity);
+
+            await _dbContext.SaveChangesAsync();
+            
+            return Ok();
+        }
+    }
+}

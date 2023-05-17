@@ -61,13 +61,8 @@ export default {
       contactNo: null,
       sidebarBackground: "", // Initialize as empty string
       aboutme:
-        "I'm THE groomer. The one and only. I'm the best groomer in the world.",
+        "I'm THE groomer - the one and only. I'm the best groomer in the world.",
     };
-  },
-  created() {
-    eventBus.$on("colorChanged", (color) => {
-      store.commit("setSidebarColor", color); // Update the color in the Vuex store
-    });
   },
   mounted() {
     this.sidebarBackground = store.state.sidebarColor; // Set the initial value from the Vuex store

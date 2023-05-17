@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\jp\\OneDrive - Embryo Plus\\Documents\\Work\\Mountain Hops\\Technical Test\\MHS-Technical-Test\\backend\\backend.csproj": {}
+    "C:\\Users\\jp\\OneDrive - Embryo Plus\\Documents\\Work\\Mountain Hops\\Technical Test\\MHS-Technical-Test\\backend\\backend.csproj": {}
   },
   "projects": {
-    "c:\\Users\\jp\\OneDrive - Embryo Plus\\Documents\\Work\\Mountain Hops\\Technical Test\\MHS-Technical-Test\\backend\\backend.csproj": {
+    "C:\\Users\\jp\\OneDrive - Embryo Plus\\Documents\\Work\\Mountain Hops\\Technical Test\\MHS-Technical-Test\\backend\\backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\jp\\OneDrive - Embryo Plus\\Documents\\Work\\Mountain Hops\\Technical Test\\MHS-Technical-Test\\backend\\backend.csproj",
+        "projectUniqueName": "C:\\Users\\jp\\OneDrive - Embryo Plus\\Documents\\Work\\Mountain Hops\\Technical Test\\MHS-Technical-Test\\backend\\backend.csproj",
         "projectName": "backend",
-        "projectPath": "c:\\Users\\jp\\OneDrive - Embryo Plus\\Documents\\Work\\Mountain Hops\\Technical Test\\MHS-Technical-Test\\backend\\backend.csproj",
+        "projectPath": "C:\\Users\\jp\\OneDrive - Embryo Plus\\Documents\\Work\\Mountain Hops\\Technical Test\\MHS-Technical-Test\\backend\\backend.csproj",
         "packagesPath": "C:\\Users\\jp\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\jp\\OneDrive - Embryo Plus\\Documents\\Work\\Mountain Hops\\Technical Test\\MHS-Technical-Test\\backend\\obj\\",
+        "outputPath": "C:\\Users\\jp\\OneDrive - Embryo Plus\\Documents\\Work\\Mountain Hops\\Technical Test\\MHS-Technical-Test\\backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jp\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,7 +40,15 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[7.0.5, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[7.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[7.0.5, )"
             },

@@ -30,11 +30,6 @@ export default {
       sidebarBackground: "", // Initialize as empty string
     };
   },
-  created() {
-    eventBus.$on("colorChanged", (color) => {
-      store.commit("setSidebarColor", color); // Update the color in the Vuex store
-    });
-  },
   mounted() {
     this.sidebarBackground = store.state.sidebarColor; // Set the initial value from the Vuex store
 
