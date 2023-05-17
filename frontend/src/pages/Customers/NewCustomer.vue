@@ -8,18 +8,11 @@
             <form @submit.prevent="createCustomer">
                 <div class="md-layout">
                     <!-- Customer form fields -->
-                    <div class="md-layout-item md-small-size-100 md-size-50">
+                    <div class="md-layout-item md-small-size-100 md-size-100">
                         <md-field>
                             <label for="customer_name">Customer Name</label>
                             <md-input type="text" id="customer_name" v-model="customerData.customer_name"
                                 required></md-input>
-                        </md-field>
-                    </div>
-
-                    <div class="md-layout-item md-small-size-100 md-size-50">
-                        <md-field>
-                            <label for="pet_name">Pet Name</label>
-                            <md-input type="text" id="pet_name" v-model="customerData.pet_name" required></md-input>
                         </md-field>
                     </div>
 
@@ -90,7 +83,6 @@ export default {
             sidebarBackground: "",
             customerData: {
                 customer_name: '',
-                pet_name: '',
                 email: '',
                 contactno: '',
                 cust_since_date: '',
