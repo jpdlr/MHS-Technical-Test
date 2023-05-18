@@ -22,18 +22,25 @@ The MHS Technical Test showcased a SaaS solution tailored specifically for "Fur-
 ## :cloud: Build Setup
 - Clone the repo: `git clone https://github.com/jpdlr/MHS-Technical-Test`.
 
+### Change Directory
+`cd MHS-Technical-Test`
+
+### Run Batch Script
+`.\run.bat`
+
+### Batch Script Contains
 ### Fronted
-#### change route
+1. change route
 `cd frontend`
-#### install dependencies
+2. install dependencies
 `npm install`
-#### serve with hot reload at localhost:8080
+3. serve with hot reload at localhost:8080
 `npm run serve`
 
 ### Backend
-#### change route
+1. change route
 `cd backend`
-#### run backend
+2. run backend
 `dotnet run`
 
 
