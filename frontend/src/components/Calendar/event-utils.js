@@ -14,34 +14,93 @@ export async function getCustomers() {
 
 export function initializeEvents() {
   return getCustomers().then((customers) => {
-    return customers.map((customer) => {
-      const startDate = calculateStartDate(customer.groom_day, customer.cust_since_date);
+    const events = [];
 
+    customers.forEach((customer) => {
       if (customer.groom_frequency === 'Weekly') {
-        return {
+        const startDate = calculateStartDate(customer.groom_day, customer.cust_since_date);
+        const event = {
           id: createEventId(),
           title: customer.customer_name,
           start: startDate,
           startRecur: startDate,
           daysOfWeek: [getDayOfWeek(customer.groom_day)],
-        }
+        };
+        events.push(event);
       } else if (customer.groom_frequency === 'EveryOtherWeek') {
-        return {
+        const startDate = calculateStartDate(customer.groom_day, customer.cust_since_date);
+        const event = {
           id: createEventId(),
           title: customer.customer_name,
           start: startDate,
           allDay: true,
+        };
+        events.push(event);
+
+        // Repeat event creation for 1 year
+        for (let i = 1; i <= 26; i++) {
+          const nextStartDate = new Date(startDate);
+          nextStartDate.setDate(nextStartDate.getDate() + 14 * i);
+
+          const nextEvent = {
+            id: createEventId(),
+            title: customer.customer_name,
+            start: nextStartDate,
+            allDay: true,
+          };
+          events.push(nextEvent);
+        }
+      } else if (customer.groom_frequency === 'Monthly') {
+        const groomDayIndex = getDayOfWeek(customer.groom_day);
+        const currentDate = new Date();
+        const currentYear = currentDate.getFullYear();
+        const currentMonth = currentDate.getMonth();
+
+        // Find the first occurrence of groom_day in the current or next month
+        let month = currentMonth;
+        let year = currentYear;
+        let firstStartDate = calculateStartDate(customer.groom_day, `${year}-${month + 1}-01`);
+
+        if (firstStartDate < currentDate) {
+          if (month === 11) {
+            year++;
+            month = 0;
+          } else {
+            month++;
+          }
+          firstStartDate = calculateStartDate(customer.groom_day, `${year}-${month + 1}-01`);
         }
 
-      } else if (customer.groom_frequency === 'Monthly') {
-        return {
+        const event = {
           id: createEventId(),
           title: customer.customer_name,
-          start: startDate,
+          start: firstStartDate,
           allDay: true,
+        };
+        events.push(event);
+
+        // Repeat event creation for 11 more times
+        for (let i = 1; i <= 11; i++) {
+          if (month === 11) {
+            year++;
+            month = 0;
+          } else {
+            month++;
+          }
+          const nextStartDate = calculateStartDate(customer.groom_day, `${year}-${month + 1}-01`);
+
+          const nextEvent = {
+            id: createEventId(),
+            title: customer.customer_name,
+            start: nextStartDate,
+            allDay: true,
+          };
+          events.push(nextEvent);
         }
       }
     });
+
+    return events;
   }).catch((error) => {
     console.error('Error initializing events:', error);
     return []; // Return an empty array if an error occurs
