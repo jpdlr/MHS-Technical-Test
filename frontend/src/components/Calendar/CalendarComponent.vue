@@ -3,7 +3,7 @@ import FullCalendar from "@fullcalendar/vue";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import { INITIAL_EVENTS, initializeEvents } from "./event-utils";
+import { initializeEvents } from "./event-utils";
 
 export default {
   components: {
@@ -23,12 +23,12 @@ export default {
           right: "dayGridMonth,timeGridWeek,timeGridDay",
         },
         initialView: "dayGridMonth",
-        initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
         editable: true,
         selectable: true,
         selectMirror: true,
         dayMaxEvents: true,
         weekends: true,
+        events: [],
         select: this.handleDateSelect,
         eventClick: this.handleEventClick,
         eventsSet: this.handleEvents,
@@ -39,12 +39,17 @@ export default {
                 */
       },
       currentEvents: [],
-    };
+    };  
   },
   async created() {
-    await initializeEvents();
+    await this.loadEvents();
   },
   methods: {
+    async loadEvents() {
+      const events = await initializeEvents();
+      this.calendarOptions.events = events;
+    },
+
     handleWeekendsToggle() {
       this.calendarOptions.weekends = !this.calendarOptions.weekends; // update a property
     },

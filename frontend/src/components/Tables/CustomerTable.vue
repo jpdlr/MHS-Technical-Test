@@ -31,6 +31,7 @@
 
 <script>
 import api from '@/CustomerApiService.js';
+import store from "@/store.js";
 
 export default {
   name: "customer-table",
@@ -65,7 +66,8 @@ export default {
       this.loading = true;
 
       try {
-        this.customers = await api.getAllCustomers();
+        const loggedGroomer = store.state.loggedGroomer;
+        this.customers = await api.getAllCustomersForGroomer(loggedGroomer);
       } finally {
         this.loading = false;
       }

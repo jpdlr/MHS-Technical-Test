@@ -19,6 +19,9 @@ export default {
   getAllCustomers() {
     return this.execute('get', '/')
   },
+  getAllCustomersForGroomer(data) {
+    return this.execute('post', '/groomer', data)
+  },
   createCustomer(data) {
     return this.execute('post', '/', data)
   },

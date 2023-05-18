@@ -29,6 +29,13 @@ namespace backend.Controllers
             return await _dbContext.CustomerRecords.FindAsync(id);
         }
 
+        // POST api/CustomerList/groomer
+        [HttpPost("groomer")]
+        public async Task<ActionResult<List<CustomerRecord>>> GetGroomer(GroomerRecord model)
+        {
+            return await _dbContext.CustomerRecords.Where(f => f.groomer_id == model.email).ToListAsync();
+        }
+
         // POST api/CustomerList
         [HttpPost]
         public async Task Post(CustomerRecord model)

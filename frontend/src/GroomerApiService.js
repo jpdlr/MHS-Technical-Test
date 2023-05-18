@@ -20,7 +20,7 @@ export default {
         return this.execute('get', '/')
     },
     getGroomer(id, data) {
-        return this.execute('get', `/0`, data)
+        return this.execute('get', `/${id}`, data)
     },
     createGroomer(data) {
         return this.execute('post', '/', data)

@@ -82,6 +82,7 @@ export default {
         return {
             sidebarBackground: "",
             customerData: {
+                groomer_id: '',
                 customer_name: '',
                 email: '',
                 contactno: '',
@@ -107,6 +108,9 @@ export default {
     methods: {
         async createCustomer() {
             try {
+                const loggedGroomer = store.state.loggedGroomer;
+                this.customerData.groomer_id = loggedGroomer.email;
+                
                 await api.createCustomer(this.customerData);
                 window.alert('Customer Created Successfully');
                 // Redirect to the customer list page after successful creation.
