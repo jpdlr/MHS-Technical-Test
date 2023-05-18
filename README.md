@@ -12,9 +12,9 @@ The MHS Technical Test showcased a SaaS solution tailored specifically for "Fur-
 
 ## Demo
 
-| Calendar | Customer Tables | Pet Tabls |
-| --- | --- | --- |
-| [![Start page](src/assets/github/dashboard.png)](https://demos.creative-tim.com/vue-material-dashboard) | [![User profile page](src/assets/github/user_profile.png)](https://demos.creative-tim.com/vue-material-dashboard/#/user) | [![Tables page ](src/assets/github/tables.png)](https://demos.creative-tim.com/vue-material-dashboard/#/table) | [![Maps Page](src/assets/github/maps.png)](https://demos.creative-tim.com/vue-material-dashboard/#/maps) | [![Notification page](src/assets/github/notification.png)](https://demos.creative-tim.com/vue-material-dashboard/#/notifications)
+| Login | Calendar | Customer Tables | Pet Tabls |
+| --- | --- | --- | --- |
+| [![Login page](github/assets/login.png)] | [![Calendar Page](github/assets/Calendar.png)] | [![Customer Tables page ](github/assets/CustomerTables.png)] | [![Pet Tabls Page](github/assets/PetsTable.png)] |
 
 
 ## Quick start
