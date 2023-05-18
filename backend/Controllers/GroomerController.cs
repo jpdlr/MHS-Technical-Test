@@ -50,6 +50,13 @@ namespace backend.Controllers
         [HttpPost]
         public async Task Post(GroomerRecord model)
         {
+            // First check if the email already exists
+            var exists = await _dbContext.GroomerRecords.AnyAsync(f => f.email == model.email);
+            if (exists)
+            {
+                throw new Exception("Email already exists");
+            }
+
             model.id = Guid.NewGuid().ToString();
             model.register_date = DateTime.Now;
             model.last_login = DateTime.Now;

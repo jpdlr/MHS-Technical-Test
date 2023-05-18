@@ -6,19 +6,19 @@
             <div class="md-layout-item md-small-size-100 md-size-50">
                 <md-field>
                     <label>Groomer Name</label>
-                    <md-input v-model="groomer_data.groomer_name" type="groomer_name"></md-input>
+                    <md-input v-model="groomer_data.groomer_name" type="groomer_name" required></md-input>
                 </md-field>
             </div>
             <div class="md-layout-item md-small-size-100 md-size-50">
                 <md-field>
                     <label>Email Address</label>
-                    <md-input v-model="groomer_data.email" type="email"></md-input>
+                    <md-input v-model="groomer_data.email" type="email" required></md-input>
                 </md-field>
             </div>
             <div class="md-layout-item md-small-size-100 md-size-50">
                 <md-field>
                     <label>Password</label>
-                    <md-input v-model="groomer_data.password" type="password"></md-input>
+                    <md-input v-model="groomer_data.password" type="password" required></md-input>
                 </md-field>
             </div>
             <div class="form-field">
@@ -51,7 +51,7 @@ export default {
             } catch (error) {
                 // Handle any error that occurred during customer creation.
                 console.error(error);
-                window.alert('Error Creating Groomer');
+                window.alert("Error Creating Groomer");
             }
         },
     },
