@@ -13,7 +13,7 @@
         <md-table-cell md-label="Pet Name">{{ item.pet_name }}</md-table-cell>
         <md-table-cell md-label="Email">{{ item.email }}</md-table-cell>
         <md-table-cell md-label="Contact Number">{{ item.contactno }}</md-table-cell>
-        <md-table-cell md-label="Customer Since Date">{{ item.cust_since_date }}</md-table-cell>
+        <md-table-cell md-label="Customer Since Date">{{ item.cust_since_date.replace(/T.*$/, "") }}</md-table-cell>
         <md-table-cell md-label="Groom Day">{{ item.groom_day }}</md-table-cell>
         <md-table-cell md-label="Groom Frequency">{{ item.groom_frequency }}</md-table-cell>
         <md-table-cell md-label="Actions">

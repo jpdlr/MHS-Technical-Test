@@ -3,13 +3,12 @@ import FullCalendar from "@fullcalendar/vue";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import { INITIAL_EVENTS, createEventId } from "./event-utils";
+import { INITIAL_EVENTS, initializeEvents } from "./event-utils";
 
 export default {
   components: {
     FullCalendar, // make the <FullCalendar> tag available
   },
-
   data: function () {
     return {
       calendarOptions: {
@@ -42,34 +41,22 @@ export default {
       currentEvents: [],
     };
   },
-
+  async created() {
+    await initializeEvents();
+  },
   methods: {
     handleWeekendsToggle() {
       this.calendarOptions.weekends = !this.calendarOptions.weekends; // update a property
     },
 
     handleDateSelect(selectInfo) {
-      let title = prompt("Please enter a new title for your event");
-      let calendarApi = selectInfo.view.calendar;
-
-      calendarApi.unselect(); // clear date selection
-
-      if (title) {
-        calendarApi.addEvent({
-          id: createEventId(),
-          title,
-          start: selectInfo.startStr,
-          end: selectInfo.endStr,
-          allDay: selectInfo.allDay,
-        });
+      if (confirm("Do you want to add a new customer?")) {
+        this.$router.push('/new_customer');
       }
     },
 
     handleEventClick(clickInfo) {
-      if (
-        confirm(
-          `Are you sure you want to delete the event '${clickInfo.event.title}'`
-        )
+      if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)
       ) {
         clickInfo.event.remove();
       }
@@ -84,10 +71,7 @@ export default {
 
 <template>
   <div class="calendar-div">
-    <FullCalendar
-      class="calendar-component custom-calendar"
-      :options="calendarOptions"
-    >
+    <FullCalendar class="calendar-component custom-calendar" :options="calendarOptions">
       <template v-slot:eventContent="arg">
         <b>{{ arg.timeText }}</b>
         <i>{{ arg.event.title }}</i>
