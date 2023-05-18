@@ -27,10 +27,8 @@ The MHS Technical Test showcased a SaaS solution tailored specifically for "Fur-
 `cd frontend`
 #### install dependencies
 `npm install`
-#### build for production with minification
-`npm run build`
 #### serve with hot reload at localhost:8080
-`npm run dev`
+`npm run serve`
 
 ### Backend
 #### change route
