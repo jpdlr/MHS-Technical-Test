@@ -28,6 +28,8 @@
 
 <script>
 import api from "@/GroomerApiService.js"
+import store from '@/store';
+
 
 export default {
   name: "Login",
@@ -43,6 +45,8 @@ export default {
     async login() {
       try {
         await api.loginGroomer(this.groomer_data);
+        store.commit('setLoggedGroomer', this.groomer_data);
+        store.commit('setLoggedIn', true);
         this.$router.push('/calendar');
       } catch (error) {
         // Handle any error that occurred during customer creation.

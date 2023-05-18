@@ -23,6 +23,24 @@ const router = new VueRouter({
   linkExactActiveClass: "nav-item active",
 });
 
+// Add a beforeEach navigation guard
+router.beforeEach((to, from, next) => {
+  // Check if the route requires authentication
+  if (to.meta.requiresAuth) {
+    // Check if the groomer is logged in
+    if (store.state.loggedIn) {
+      // The groomer is logged in, allow access to the route
+      next();
+    } else {
+      // The groomer is not logged in, redirect to the login page
+      next('/login');
+    }
+  } else {
+    // The route does not require authentication, allow access
+    next();
+  }
+});
+
 Vue.prototype.$Chartist = Chartist;
 
 Vue.use(VueRouter);
