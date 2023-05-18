@@ -11,8 +11,7 @@
                     <div class="md-layout-item md-small-size-100 md-size-50">
                         <md-field>
                             <label for="customer_name">Customer Name</label>
-                            <md-input type="text" id="customer_name" v-model="petData.customer_name"
-                                required></md-input>
+                            <md-input type="text" id="customer_name" v-model="petData.customer_name" required></md-input>
                         </md-field>
                     </div>
 
@@ -25,8 +24,9 @@
 
                     <div class="md-layout-item md-small-size-100 md-size-50">
                         <md-field>
-                            <label for="tag_serial_number">Pet Name</label>
-                            <md-input type="text" id="pet_name" v-model="petData.tag_serial_number" required></md-input>
+                            <label for="tag_serial_number">Tag Serial Number</label>
+                            <md-input type="text" id="tag_serial_number" v-model="petData.tag_serial_number"
+                                required></md-input>
                         </md-field>
                     </div>
 
@@ -94,17 +94,21 @@ export default {
     },
     methods: {
         async createPet() {
+            if (this.petData.tag_serial_number.length < 12) {
+                window.alert('Tag Serial Number must be greater than 12 characters');
+                return; // Stop the method execution
+            }
             try {
                 await api.createPet(this.petData);
-                // show success dialog
-                this.$root.$emit('showSnackbar', 'Pet created successfully');
+                // Pet creation was successful.
+                window.alert('Pet Created Successfully');
                 // Redirect to the pet list page after successful creation.
                 this.$router.push('/petlist');
             } catch (error) {
                 // Handle any error that occurred during pet creation.
                 console.error(error);
                 // Optionally, show an error message to the user.
-                this.$root.$emit('showSnackbar', 'Error creating pet');
+                window.alert('Error Creating Pet');
             }
         },
     },
