@@ -12,7 +12,7 @@
       <div class="md-layout-item md-small-size-100 md-size-50">
         <md-field>
           <label>Password</label>
-          <md-input v-model="emailadress" type="password"></md-input>
+          <md-input v-model="password" type="password"></md-input>
         </md-field>
       </div>
       <div class="form-field">
@@ -27,6 +27,33 @@
 
 
 <script>
+import axios from "axios";
+
+export default {
+  name: "Login",
+  data() {
+    return {
+      emailadress: "",
+      password: "",
+    };
+  },
+  methods: {
+    login() {
+      axios
+        .post("http://localhost:3000/login", {
+          emailadress: this.emailadress,
+          password: this.password,
+        })
+        .then((response) => {
+          console.log(response);
+          this.$router.push("/customers");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
+};
 </script>
 
 <style scoped>
