@@ -19,6 +19,11 @@ The MHS Technical Test showcased a SaaS solution tailored specifically for "Fur-
 
 ## Quick start
 
+## Dependencies
+- `npm`
+- `git`
+- `dotnet`
+
 ## :cloud: Build Setup
 - Clone the repo: `git clone https://github.com/jpdlr/MHS-Technical-Test`.
 
