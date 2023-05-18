@@ -1,9 +1,10 @@
 import CalendarLayout from "@/pages/Layout/CalendarLayout.vue";
 import Calendar from "@/pages/Calendar.vue";
-import UserProfile from "@/pages/UserProfile.vue";
+import UserProfile from "@/pages/UserProfile/UserProfile.vue";
 import CustomerList from "@/pages/Customers/CustomerList.vue";
 import PetList from "@/pages/Pets/PetList.vue";
-import Login from "@/pages/Login.vue";
+import Login from "@/pages/Login/Login.vue";
+import Register from "@/pages/Login/Register.vue";
 
 const routes = [
   {
@@ -14,6 +15,10 @@ const routes = [
   {
     path: "/",
     redirect: "/login",
+  },
+  {
+    path: "/register",
+    component: Register
   },
   {
     path: "/calendar",

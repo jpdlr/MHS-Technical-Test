@@ -11,7 +11,7 @@
           <div class="md-layout-item md-small-size-100 md-size-50">
             <md-field>
               <label>Email Address</label>
-              <md-input v-model="emailadress" type="email"></md-input>
+              <md-input v-model="email" type="email"></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-50">
@@ -55,7 +55,7 @@ export default {
   data() {
     return {
       disabled: null,
-      emailadress: null,
+      email: null,
       lastname: null,
       firstname: null,
       contactNo: null,

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace backend.Controllers
 {
-    [Route("api/register")]
+    [Route("api/groomer")]
     [ApiController]
     public class GroomerRecordsController : ControllerBase
     {
@@ -29,11 +29,30 @@ namespace backend.Controllers
             return await _dbContext.GroomerRecords.FindAsync(id);
         }
 
+        // POST api/CustomerList/login
+        [HttpPost("login")]
+        public async Task<ActionResult<GroomerRecord>> Login(GroomerRecord model)
+        {
+            var entity = await _dbContext.GroomerRecords.FirstOrDefaultAsync(f => f.email == model.email && f.password == model.password);
+            if (entity == null)
+            {
+                return NotFound();
+            }
+
+            entity.last_login = DateTime.Now;
+
+            await _dbContext.SaveChangesAsync();
+
+            return entity;
+        }
+
         // POST api/CustomerList
         [HttpPost]
         public async Task Post(GroomerRecord model)
         {
             model.id = Guid.NewGuid().ToString();
+            model.register_date = DateTime.Now;
+            model.last_login = DateTime.Now;
 
             // print out the model to the console
             Console.WriteLine(model);
@@ -67,7 +86,7 @@ namespace backend.Controllers
         {
             var entity = await _dbContext.GroomerRecords.FindAsync(id);
 
-            _dbContext.GroomerRecords.Remove(entity);
+            _dbContext.GroomerRecords.Remove(entity!);
 
             await _dbContext.SaveChangesAsync();
             

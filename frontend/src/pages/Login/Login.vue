@@ -6,13 +6,13 @@
       <div class="md-layout-item md-small-size-100 md-size-50">
         <md-field>
           <label>Email Address</label>
-          <md-input v-model="emailadress" type="email"></md-input>
+          <md-input v-model="groomer_data.email" type="email"></md-input>
         </md-field>
       </div>
       <div class="md-layout-item md-small-size-100 md-size-50">
         <md-field>
           <label>Password</label>
-          <md-input v-model="password" type="password"></md-input>
+          <md-input v-model="groomer_data.password" type="password"></md-input>
         </md-field>
       </div>
       <div class="form-field">
@@ -20,37 +20,38 @@
       </div>
     </form>
     <div class="register-container">
-      <button class="register-button">Register</button>
+      <button class="register-button" @click="register()">Register</button>
     </div>
   </div>
 </template>
 
 
 <script>
-import axios from "axios";
+import api from "@/GroomerApiService.js"
 
 export default {
   name: "Login",
   data() {
     return {
-      emailadress: "",
-      password: "",
+      groomer_data: {
+        email: "",
+        password: "",
+      },
     };
   },
   methods: {
-    login() {
-      axios
-        .post("http://localhost:3000/login", {
-          emailadress: this.emailadress,
-          password: this.password,
-        })
-        .then((response) => {
-          console.log(response);
-          this.$router.push("/customers");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    async login() {
+      try {
+        await api.loginGroomer(this.groomer_data);
+        this.$router.push('/calendar');
+      } catch (error) {
+        // Handle any error that occurred during customer creation.
+        console.error(error);
+        window.alert('Error Logging In');
+      }
+    },
+    register() {
+      this.$router.push("/register");
     },
   },
 };
@@ -130,5 +131,4 @@ label {
 .register-button:hover {
   text-decoration: underline;
 }
-
 </style>

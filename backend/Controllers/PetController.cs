@@ -64,7 +64,7 @@ namespace backend.Controllers
         {
             var entity = await _dbContext.PetRecords.FindAsync(id);
 
-            _dbContext.PetRecords.Remove(entity);
+            _dbContext.PetRecords.Remove(entity!);
 
             await _dbContext.SaveChangesAsync();
             
