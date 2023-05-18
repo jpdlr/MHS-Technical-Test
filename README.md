@@ -14,7 +14,7 @@ The MHS Technical Test showcased a SaaS solution tailored specifically for "Fur-
 
 | Login | Calendar | Customer Tables | Pet Tabls |
 | --- | --- | --- | --- |
-| [![Login page](github/assets/login.png)] | [![Calendar Page](github/assets/Calendar.png)] | [![Customer Tables page ](github/assets/CustomerTables.png)] | [![Pet Tabls Page](github/assets/PetsTable.png)] |
+| ![Login page](github/assets/login.png) | ![Calendar Page](github/assets/Calendar.png) | ![Customer Tables page ](github/assets/CustomerTables.png) | ![Pet Tabls Page](github/assets/PetsTable.png) |
 
 
 ## Quick start
