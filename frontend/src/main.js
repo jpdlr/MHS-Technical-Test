@@ -17,6 +17,10 @@ import Chartist from "chartist";
 
 import store from './store';
 
+import DaySpanVuetify from 'dayspan-vuetify'
+import Vuetify from 'vuetify'
+
+
 // configure router
 const router = new VueRouter({
   routes, // short for routes: routes
@@ -43,6 +47,12 @@ router.beforeEach((to, from, next) => {
 
 Vue.prototype.$Chartist = Chartist;
 
+Vue.use(Vuetify);
+Vue.use(DaySpanVuetify, {
+  methods: {
+    getDefaultEventColor: () => '#1976d2'
+  }
+});
 Vue.use(VueRouter);
 Vue.use(MaterialDashboard);
 Vue.use(GlobalComponents);

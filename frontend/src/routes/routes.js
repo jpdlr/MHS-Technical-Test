@@ -78,7 +78,7 @@ const routes = [
     children: [
       {
         path: "/",
-        component: () => import("@/pages/Pets/NewPet.vue"),
+        component: () => import("@/pages/Customers/NewPet.vue"),
         meta: { requiresAuth: true },
       },
     ],

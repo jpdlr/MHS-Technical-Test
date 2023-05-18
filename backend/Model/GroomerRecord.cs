@@ -8,7 +8,6 @@ namespace backend.Model
         public string password { get; set; } = "";
         public DateTime register_date { get; set; } = DateTime.Now;
         public DateTime last_login { get; set; } = DateTime.Now;
-
         public ICollection<CustomerRecord> Customers { get; set; } = new List<CustomerRecord>();
     }
 }

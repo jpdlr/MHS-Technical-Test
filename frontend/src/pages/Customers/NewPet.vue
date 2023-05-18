@@ -82,6 +82,7 @@ export default {
         };
     },
     mounted() {
+        this.petData.customer_name = this.$route.query.customer_name;
         this.sidebarBackground = store.state.sidebarColor; // Set the initial value from the Vuex store
 
         // Watch for changes in the sidebarColor Vuex store and update sidebarBackground accordingly

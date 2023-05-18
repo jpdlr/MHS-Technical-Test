@@ -17,11 +17,6 @@
         <md-table-cell md-label="Allergies">{{ item.allergies }}</md-table-cell>
       </md-table-row>
     </md-table>
-
-    <!-- Create pet button -->
-    <div class="md-layout-item md-size-100 text-right">
-      <md-button class="md-raised md-success" @click="createNewPet">Create New Pet</md-button>
-    </div>
   </div>
 </template>
 
@@ -64,9 +59,6 @@ export default {
       } finally {
         this.loading = false;
       }
-    },
-    createNewPet() {
-      this.$router.push('/new_pet');
     },
     async deletePet(id) {
       if (confirm("Are you sure you want to delete this record?")) {

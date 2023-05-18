@@ -61,8 +61,55 @@
                         </div>
                     </div>
 
+                    <!-- Create pet button -->
+                    <div class="md-layout-item md-size-100 text-left">
+                        <md-button v-if="!showAddPetForm" class="md-raised md-success" @click="toggleAddPetForm">Add
+                            Pet</md-button>
+                    </div>
+
+                    <form v-if="showAddPetForm" class="add-pet">
+                        <div class="md-layout">
+
+                            <div class="md-layout-item md-small-size-100 md-size-100">
+                                <md-field>
+                                    <label for="pet_name">Pet Name</label>
+                                    <md-input type="text" id="pet_name" v-model="petData.pet_name" required></md-input>
+                                </md-field>
+                            </div>
+
+                            <div class="md-layout-item md-small-size-100 md-size-50">
+                                <md-field>
+                                    <label for="tag_serial_number">Tag Serial Number</label>
+                                    <md-input type="text" id="tag_serial_number" v-model="petData.tag_serial_number"
+                                        required></md-input>
+                                </md-field>
+                            </div>
+
+                            <div class="md-layout-item md-small-size-100 md-size-50">
+                                <md-field>
+                                    <label for="breed">Breed</label>
+                                    <md-input type="text" id="breed" v-model="petData.breed" required></md-input>
+                                </md-field>
+                            </div>
+
+                            <div class="md-layout-item md-small-size-100 md-size-50">
+                                <md-field>
+                                    <label for="visual_desc">Visual Description</label>
+                                    <md-input type="text" id="visual_desc" v-model="petData.visual_desc"
+                                        required></md-input>
+                                </md-field>
+                            </div>
+
+                            <div class="md-layout-item md-small-size-100 md-size-50">
+                                <md-field>
+                                    <label for="allergies">Allergies</label>
+                                    <md-input type="text" id="allergies" v-model="petData.allergies" required></md-input>
+                                </md-field>
+                            </div>
+                        </div>
+                    </form>
                     <div class="md-layout-item md-size-100 text-right">
-                        <md-button type="submit" class="md-raised md-success">Create User</md-button>
+                        <md-button type="submit" class="md-raised md-success">Create Customer</md-button>
                     </div>
                 </div>
             </form>
@@ -74,6 +121,7 @@
   
 <script>
 import api from '@/CustomerApiService.js';
+import pet_api from '@/PetApiService.js';
 import store from "@/store.js";
 
 export default {
@@ -90,8 +138,17 @@ export default {
                 groom_day: '',
                 groom_frequency: '',
             },
+            petData: {
+                customer_name: '',
+                pet_name: '',
+                tag_serial_number: '',
+                breed: '',
+                visual_desc: '',
+                allergies: '',
+            },
             daysOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
             frequencies: ['Weekly', 'EveryOtherWeek', 'Monthly'],
+            showAddPetForm: false
         };
     },
     mounted() {
@@ -106,15 +163,34 @@ export default {
         );
     },
     methods: {
+        toggleAddPetForm() {
+            this.showAddPetForm = !this.showAddPetForm; // Toggle the value of the flag
+        },
+
         async createCustomer() {
             try {
+                if (this.petData.tag_serial_number.length < 12) {
+                    window.alert('Tag Serial Number must be greater than 12 characters');
+                    return; // Stop the method execution
+                }
+                // Get Logged In Groomer
                 const loggedGroomer = store.state.loggedGroomer;
                 this.customerData.groomer_id = loggedGroomer.email;
-                
+
+                // Create the customer
                 await api.createCustomer(this.customerData);
-                window.alert('Customer Created Successfully');
-                // Redirect to the customer list page after successful creation.
-                this.$router.push('/customerlist');
+
+                // Create the pet
+                if (this.showAddPetForm) {
+                    // Add Pet to Customer
+                    this.petData.customer_name = this.customerData.customer_name;
+
+                    await pet_api.createPet(this.petData);
+                }
+
+                this.$router.push({
+                    path: '/customerlist',
+                });
             } catch (error) {
                 // Handle any error that occurred during customer creation.
                 console.error(error);

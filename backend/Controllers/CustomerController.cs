@@ -74,11 +74,21 @@ namespace backend.Controllers
         {
             var entity = await _dbContext.CustomerRecords.FindAsync(id);
 
-            _dbContext.CustomerRecords.Remove(entity!);
+            if (entity == null)
+            {
+                return NotFound();
+            }
+
+            // Remove all dogs associated with the customer
+            var dogs = _dbContext.PetRecords.Where(p => p.customer_name == entity.customer_name);
+            _dbContext.PetRecords.RemoveRange(dogs);
+
+            _dbContext.CustomerRecords.Remove(entity);
 
             await _dbContext.SaveChangesAsync();
 
             return Ok();
         }
+
     }
 }

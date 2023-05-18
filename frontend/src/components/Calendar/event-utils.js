@@ -2,7 +2,6 @@ import api from '@/CustomerApiService.js';
 import store from '@/store.js';
 
 let eventGuid = 0;
-let customers = [];
 
 // Import customers from the database
 export async function getCustomers() {
@@ -15,17 +14,33 @@ export async function getCustomers() {
 
 export function initializeEvents() {
   return getCustomers().then((customers) => {
-    console.log('Customers:', customers);
     return customers.map((customer) => {
       const startDate = calculateStartDate(customer.groom_day, customer.cust_since_date);
-      return {
-        id: createEventId(),
-        title: customer.customer_name,
-        start: startDate,
-        allDay: true, // Set to true if it's an all-day event
-        daysOfWeek: [getDayOfWeek(customer.groom_day)],
-        // Add any additional properties as needed
-      };
+
+      if (customer.groom_frequency === 'Weekly') {
+        return {
+          id: createEventId(),
+          title: customer.customer_name,
+          start: startDate,
+          startRecur: startDate,
+          daysOfWeek: [getDayOfWeek(customer.groom_day)],
+        }
+      } else if (customer.groom_frequency === 'EveryOtherWeek') {
+        return {
+          id: createEventId(),
+          title: customer.customer_name,
+          start: startDate,
+          allDay: true,
+        }
+
+      } else if (customer.groom_frequency === 'Monthly') {
+        return {
+          id: createEventId(),
+          title: customer.customer_name,
+          start: startDate,
+          allDay: true,
+        }
+      }
     });
   }).catch((error) => {
     console.error('Error initializing events:', error);
@@ -48,6 +63,7 @@ function getDayOfWeek(dayString) {
 export const INITIAL_EVENTS = [];
 
 initializeEvents().then((events) => {
+  INITIAL_EVENTS.length = 0; // Clear the array before pushing new events
   INITIAL_EVENTS.push(...events);
 });
 
