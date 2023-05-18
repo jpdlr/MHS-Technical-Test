@@ -1,5 +1,12 @@
 <template>
   <div>
+    <!-- Search bar -->
+    <md-field>
+      <label>Search...</label>
+      <md-input v-model="searchQuery" @input="search"></md-input>
+    </md-field>
+
+    <!-- Customer table -->
     <md-table v-model="pets" :table-header-color="tableHeaderColor">
       <md-table-row slot="md-table-row" slot-scope="{ item }">
         <md-table-cell md-label="Customer Name">{{ item.customer_name }}</md-table-cell>
@@ -41,7 +48,8 @@ export default {
         breed: "",
         visual_desc: "",
         allergies: ""
-      }
+      },
+      searchQuery: "",
     };
   },
   async created() {
@@ -83,7 +91,26 @@ export default {
         visual_desc: "",
         allergies: ""
       };
-    }
+    },
+    search() {
+      const query = this.searchQuery.toLowerCase().trim();
+
+      if (query === "") {
+        // If the search query is empty, show all customers
+        this.getAll();
+      } else {
+        // Otherwise, show only the customers that match the search query
+
+        // Filter by pet name, breed and tag serial number
+        this.pets = this.pets.filter((pet) => {
+          return (
+            pet.pet_name.toLowerCase().includes(query) ||
+            pet.breed.toLowerCase().includes(query) ||
+            pet.tag_serial_number.toLowerCase().includes(query)
+          );
+        });
+      }
+    },
   }
 };
 </script>

@@ -26,16 +26,7 @@ namespace backend.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<CustomerRecord>> Get(string id)
         {
-            var customer = await _dbContext.CustomerRecords
-                .Include(c => c.Pets)
-                .FirstOrDefaultAsync(c => c.id == id);
-
-            if (customer == null)
-            {
-                return NotFound();
-            }
-
-            return customer;
+            return await _dbContext.CustomerRecords.FindAsync(id);
         }
 
         // POST api/CustomerList

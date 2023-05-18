@@ -1,5 +1,12 @@
 <template>
   <div>
+    <!-- Search bar -->
+    <md-field>
+      <label>Search Customer Name</label>
+      <md-input v-model="searchQuery" @input="search"></md-input>
+    </md-field>
+
+    <!-- Customer table -->
     <md-table v-model="customers" :table-header-color="tableHeaderColor">
       <md-table-row slot="md-table-row" slot-scope="{ item }">
         <md-table-cell md-label="Name">{{ item.customer_name }}</md-table-cell>
@@ -14,6 +21,7 @@
         </md-table-cell>
       </md-table-row>
     </md-table>
+
     <!-- Create customer button -->
     <div class="md-layout-item md-size-100 text-right">
       <md-button class="md-raised md-success" @click="createNewCustomer">Create New Customer</md-button>
@@ -45,7 +53,8 @@ export default {
         cust_since_date: "",
         groom_day: "",
         groom_frequency: ""
-      }
+      },
+      searchQuery: "",
     };
   },
   async created() {
@@ -88,7 +97,22 @@ export default {
         groom_day: "",
         groom_frequency: ""
       };
-    }
+    },
+    search() {
+      const query = this.searchQuery.toLowerCase().trim();
+
+      if (query === "") {
+        // If the search query is empty, show all customers
+        this.getAll();
+      } else {
+        // Otherwise, show only the customers that match the search query
+
+        // Filter the customers by name
+        this.customers = this.customers.filter((customer) => {
+          return customer.customer_name.toLowerCase().includes(query);
+        });
+      }
+    },
   }
 };
 </script>
