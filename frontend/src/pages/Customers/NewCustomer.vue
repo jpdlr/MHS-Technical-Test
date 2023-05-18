@@ -152,6 +152,7 @@ export default {
         };
     },
     mounted() {
+        this.customerData = this.$route.query.customerData; // Get the customer data from the query string
         this.sidebarBackground = store.state.sidebarColor; // Set the initial value from the Vuex store
 
         // Watch for changes in the sidebarColor Vuex store and update sidebarBackground accordingly

@@ -47,9 +47,9 @@ const routes = [
     ],
   },
   {
-    path: "/new_customer",
+    path: "/customer",
     component: CalendarLayout,
-    redirect: "/new_customer",
+    redirect: "/customer",
     children: [
       {
         path: "/",

@@ -10,15 +10,20 @@
     <md-table v-model="customers" :table-header-color="tableHeaderColor">
       <md-table-row slot="md-table-row" slot-scope="{ item }">
         <md-table-cell md-label="Name">{{ item.customer_name }}</md-table-cell>
-        <md-table-cell md-label="Pet Name">{{ item.pet_name }}</md-table-cell>
         <md-table-cell md-label="Email">{{ item.email }}</md-table-cell>
         <md-table-cell md-label="Contact Number">{{ item.contactno }}</md-table-cell>
         <md-table-cell md-label="Customer Since Date">{{ item.cust_since_date.replace(/T.*$/, "") }}</md-table-cell>
         <md-table-cell md-label="Groom Day">{{ item.groom_day }}</md-table-cell>
         <md-table-cell md-label="Groom Frequency">{{ item.groom_frequency }}</md-table-cell>
         <md-table-cell md-label="Actions">
-          <md-button @click="deleteCustomer(item.id)">Delete</md-button>
+          <md-icon-button @click="editCustomer(item)">
+            <md-icon>edit</md-icon>
+          </md-icon-button>
+          <md-icon-button @click="deleteCustomer(item.id)">
+            <md-icon>delete</md-icon>
+          </md-icon-button>
         </md-table-cell>
+
       </md-table-row>
     </md-table>
 
@@ -48,7 +53,6 @@ export default {
       model: {
         id: "",
         customer_name: "",
-        pet_name: "",
         email: "",
         contactno: "",
         cust_since_date: "",
@@ -73,7 +77,28 @@ export default {
       }
     },
     createNewCustomer() {
-      this.$router.push('/new_customer');
+      this.$router.push({
+        path: "/customer",
+        query: {
+          customerData: {
+            id: "",
+            customer_name: "",
+            email: "",
+            contactno: "",
+            cust_since_date: "",
+            groom_day: "",
+            groom_frequency: ""
+          }
+        }
+      });
+    },
+    editCustomer(customer) {
+      this.$router.push({
+        path: "/customer",
+        query: {
+          customerData: customer
+        }
+      });
     },
     async deleteCustomer(id) {
       if (confirm("Are you sure you want to delete this record?")) {
