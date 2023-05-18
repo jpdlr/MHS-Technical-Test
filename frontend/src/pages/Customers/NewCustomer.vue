@@ -108,15 +108,13 @@ export default {
         async createCustomer() {
             try {
                 await api.createCustomer(this.customerData);
-                // show success dialog
-                this.$root.$emit('showSnackbar', 'Customer created successfully');
+                window.alert('Customer Created Successfully');
                 // Redirect to the customer list page after successful creation.
                 this.$router.push('/customerlist');
             } catch (error) {
                 // Handle any error that occurred during customer creation.
                 console.error(error);
-                // Optionally, show an error message to the user.
-                this.$root.$emit('showSnackbar', 'Error creating customer');
+                window.alert('Error Creating Customer');
             }
         },
         updateFrequency(day) {
