@@ -16,10 +16,6 @@
         <md-icon>pets</md-icon>
         <p>Pet List</p>
       </sidebar-link>
-      <sidebar-link to="/user">
-        <md-icon>person</md-icon>
-        <p>User Profile</p>
-      </sidebar-link>
     </side-bar>
 
     <div class="main-panel">

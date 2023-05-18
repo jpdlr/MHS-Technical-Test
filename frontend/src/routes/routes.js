@@ -1,6 +1,5 @@
 import CalendarLayout from "@/pages/Layout/CalendarLayout.vue";
 import Calendar from "@/pages/Calendar.vue";
-import UserProfile from "@/pages/UserProfile/UserProfile.vue";
 import CustomerList from "@/pages/Customers/CustomerList.vue";
 import PetList from "@/pages/Pets/PetList.vue";
 import Login from "@/pages/Login/Login.vue";
@@ -79,19 +78,6 @@ const routes = [
       {
         path: "/",
         component: () => import("@/pages/Customers/NewPet.vue"),
-        meta: { requiresAuth: true },
-      },
-    ],
-  },
-  {
-    path: "/user",
-    component: CalendarLayout,
-    redirect: "/user",
-    children: [
-      {
-        path: "/",
-        name: "User Profile",
-        component: UserProfile,
         meta: { requiresAuth: true },
       },
     ],

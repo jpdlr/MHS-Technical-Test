@@ -24,9 +24,14 @@ namespace backend.Controllers
 
         // GET api/CustomerList/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<GroomerRecord>> Get(string id)
+        public async Task<ActionResult<GroomerRecord>> Get(string id, GroomerRecord model)
         {
-            return await _dbContext.GroomerRecords.FindAsync(id);
+            var entity = await _dbContext.GroomerRecords.FirstOrDefaultAsync(f => f.email == model.email && f.password == model.password);
+            if (entity == null)
+            {
+                return NotFound();
+            }
+            return entity;
         }
 
         // POST api/CustomerList/login
