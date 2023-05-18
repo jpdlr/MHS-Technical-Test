@@ -50,6 +50,7 @@ The MHS Technical Test showcased a SaaS solution tailored specifically for "Fur-
 2. run backend
 `dotnet run`
 
+---
 
 ## Licensing
 
