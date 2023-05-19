@@ -88,15 +88,18 @@ export default {
             cust_since_date: "",
             groom_day: "",
             groom_frequency: ""
-          }
+          },
+          newCustomer: true
         }
       });
     },
     editCustomer(customer) {
+      customer.cust_since_date = customer.cust_since_date.replace(/T.*$/, "");
       this.$router.push({
         path: "/customer",
         query: {
-          customerData: customer
+          customerData: customer,
+          newCustomer: false
         }
       });
     },

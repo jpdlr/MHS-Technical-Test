@@ -109,7 +109,9 @@
                         </div>
                     </form>
                     <div class="md-layout-item md-size-100 text-right">
-                        <md-button type="submit" class="md-raised md-success">Create Customer</md-button>
+                        <md-button type="submit" class="md-raised md-success">
+                            {{ newCustomer === 'true' ? 'Create Customer' : 'Update Customer' }}
+                        </md-button>
                     </div>
                 </div>
             </form>
@@ -130,13 +132,14 @@ export default {
         return {
             sidebarBackground: "",
             customerData: {
-                groomer_id: '',
+                id: '',
                 customer_name: '',
                 email: '',
                 contactno: '',
                 cust_since_date: '',
                 groom_day: '',
                 groom_frequency: '',
+                groomer_id: '',
             },
             petData: {
                 customer_name: '',
@@ -146,6 +149,7 @@ export default {
                 visual_desc: '',
                 allergies: '',
             },
+            newCustomer: true,
             daysOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
             frequencies: ['Weekly', 'EveryOtherWeek', 'Monthly'],
             showAddPetForm: false
@@ -153,6 +157,7 @@ export default {
     },
     mounted() {
         this.customerData = this.$route.query.customerData; // Get the customer data from the query string
+        this.newCustomer = this.$route.query.newCustomer; // Get the newCustomer flag from the query string
         this.sidebarBackground = store.state.sidebarColor; // Set the initial value from the Vuex store
 
         // Watch for changes in the sidebarColor Vuex store and update sidebarBackground accordingly
@@ -170,19 +175,28 @@ export default {
 
         async createCustomer() {
             try {
-                if (this.petData.tag_serial_number.length < 12) {
-                    window.alert('Tag Serial Number must be greater than 12 characters');
-                    return; // Stop the method execution
-                }
                 // Get Logged In Groomer
                 const loggedGroomer = store.state.loggedGroomer;
                 this.customerData.groomer_id = loggedGroomer.email;
 
+                console.log("Create Customer" + this.newCustomer);
                 // Create the customer
-                await api.createCustomer(this.customerData);
+                if (this.newCustomer === 'true') {
+                    console.log("Creating Customer");
+                    await api.createCustomer(this.customerData);
+                }
+                else {
+                    console.log("Updating Customer");
+                    await api.updateCustomer(this.customerData.id, this.customerData);
+                }
+
 
                 // Create the pet
                 if (this.showAddPetForm) {
+                    if (this.petData.tag_serial_number.length < 12) {
+                        window.alert('Tag Serial Number must be greater than 12 characters');
+                        return; // Stop the method execution
+                    }
                     // Add Pet to Customer
                     this.petData.customer_name = this.customerData.customer_name;
 
