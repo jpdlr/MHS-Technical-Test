@@ -16,7 +16,7 @@
         <md-table-cell md-label="Groom Day">{{ item.groom_day }}</md-table-cell>
         <md-table-cell md-label="Groom Frequency">{{ item.groom_frequency }}</md-table-cell>
         <md-table-cell md-label="Actions">
-          <md-button class="md-just-icon md-simple" @click="deleteCustomer(item.id)">
+          <md-button class="md-just-icon md-simple" @click="deleteCustomer(item.id, $event)">
             <md-icon>delete</md-icon>
           </md-button>
         </md-table-cell>
@@ -100,7 +100,8 @@ export default {
         }
       });
     },
-    async deleteCustomer(id) {
+    async deleteCustomer(id, event) {
+      event.stopPropagation();
       if (confirm("Are you sure you want to delete this record?")) {
         await api.deleteCustomer(id);
 
