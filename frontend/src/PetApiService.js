@@ -19,6 +19,9 @@ export default {
   getAllPets() {
     return this.execute('get', '/')
   },
+  getCustomerPets(data) {
+    return this.execute('post', '/customer', data)
+  },
   createPet(data) {
     return this.execute('post', '/', data)
   },

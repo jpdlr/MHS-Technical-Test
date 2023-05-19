@@ -29,6 +29,13 @@ namespace backend.Controllers
             return await _dbContext.PetRecords.FindAsync(id);
         }
 
+        // POST api/CustomerList/customer
+        [HttpPost("customer")]
+        public async Task<ActionResult<List<PetRecord>>> GetByCustomer(CustomerRecord model)
+        {
+            return await _dbContext.PetRecords.Where(f => f.customer_name == model.customer_name).ToListAsync();
+        }
+
         // POST api/CustomerList
         [HttpPost]
         public async Task Post(PetRecord model)

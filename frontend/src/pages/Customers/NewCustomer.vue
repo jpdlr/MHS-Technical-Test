@@ -61,6 +61,14 @@
                         </div>
                     </div>
 
+                    <!-- Display current pets -->
+                    <div v-if="newCustomer === 'false' && pets.length > 0">
+                        <h4 class="title">Current Pets</h4>
+                        <ul>
+                            <li v-for="pet in pets" :key="pet.id">{{ pet.pet_name }}</li>
+                        </ul>
+                    </div>
+
                     <!-- Create pet button -->
                     <div class="md-layout-item md-size-100 text-left">
                         <md-button v-if="!showAddPetForm" class="md-raised md-success" @click="toggleAddPetForm">Add
@@ -149,6 +157,7 @@ export default {
                 visual_desc: '',
                 allergies: '',
             },
+            pets: [],
             newCustomer: true,
             daysOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
             frequencies: ['Weekly', 'EveryOtherWeek', 'Monthly'],
@@ -159,6 +168,10 @@ export default {
         this.customerData = this.$route.query.customerData; // Get the customer data from the query string
         this.newCustomer = this.$route.query.newCustomer; // Get the newCustomer flag from the query string
         this.sidebarBackground = store.state.sidebarColor; // Set the initial value from the Vuex store
+
+        if (this.newCustomer === 'false') {
+            this.getCustomerPets();
+        }
 
         // Watch for changes in the sidebarColor Vuex store and update sidebarBackground accordingly
         this.$watch(
@@ -171,6 +184,14 @@ export default {
     methods: {
         toggleAddPetForm() {
             this.showAddPetForm = !this.showAddPetForm; // Toggle the value of the flag
+        },
+        async getCustomerPets() {
+            try {
+                const response = await pet_api.getCustomerPets(this.customerData);
+                this.pets = response;
+            } catch (err) {
+                console.log(err);
+            }
         },
 
         async createCustomer() {
