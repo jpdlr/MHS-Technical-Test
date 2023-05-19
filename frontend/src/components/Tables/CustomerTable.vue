@@ -16,12 +16,12 @@
         <md-table-cell md-label="Groom Day">{{ item.groom_day }}</md-table-cell>
         <md-table-cell md-label="Groom Frequency">{{ item.groom_frequency }}</md-table-cell>
         <md-table-cell md-label="Actions">
-          <md-icon-button @click="editCustomer(item)">
+          <md-button class="md-just-icon md-simple" @click="editCustomer(item)">
             <md-icon>edit</md-icon>
-          </md-icon-button>
-          <md-icon-button @click="deleteCustomer(item.id)">
+          </md-button>
+          <md-button class="md-just-icon md-simple" @click="deleteCustomer(item.id)">
             <md-icon>delete</md-icon>
-          </md-icon-button>
+          </md-button>
         </md-table-cell>
 
       </md-table-row>
