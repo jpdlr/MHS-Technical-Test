@@ -56,12 +56,12 @@ The MHS Technical Test showcased a SaaS solution tailored specifically for "Fur-
 ## Instructions
 1. Click "Register" to create an account.
 2. Use your email and password to log in after creating an account.
-3. The main page displays a calendar view of all events.
-&emsp;  - Clicking on an empty slot prompts you to add a customer.
-4. On the left menu, choose "Customer Lists" or "Pet Lists" for the logged-in groomer.
-&emsp;  - The Customer Lists allow you to add, edit, and delete customers.
-&emsp;  - To edit a customer, simply click on the customer in the table.
-5. The Pet List shows details of all pets associated with the groomer.
+3. The main page displays a calendar view of all events. <br>
+&emsp;  - Clicking on an empty slot prompts you to add a customer. <br>
+4. On the left menu, choose "Customer Lists" or "Pet Lists" for the logged-in groomer. <br>
+&emsp;  - The Customer Lists allow you to add, edit, and delete customers. <br>
+&emsp;  - To edit a customer, simply click on the customer in the table. <br>
+5. The Pet List shows details of all pets associated with the groomer. <br>
 &emsp;  - Clicking on a pet takes you to the Customer Details page.
 
 ## Licensing
