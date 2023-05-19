@@ -8,7 +8,7 @@
 
     <!-- Customer table -->
     <md-table v-model="pets" :table-header-color="tableHeaderColor">
-      <md-table-row slot="md-table-row" slot-scope="{ item }">
+      <md-table-row slot="md-table-row" slot-scope="{ item }" @click="editCustomer(item)">
         <md-table-cell md-label="Customer Name">{{ item.customer_name }}</md-table-cell>
         <md-table-cell md-label="Pet Name">{{ item.pet_name }}</md-table-cell>
         <md-table-cell md-label="Tag Serial Number">{{ item.tag_serial_number }}</md-table-cell>
@@ -22,6 +22,7 @@
 
 <script>
 import api from '@/PetApiService.js';
+import customer_api from '@/CustomerApiService.js';
 
 export default {
   name: "pet-table",
@@ -60,18 +61,17 @@ export default {
         this.loading = false;
       }
     },
-    async deletePet(id) {
-      if (confirm("Are you sure you want to delete this record?")) {
-        await api.deletePet(id);
-
-        // Remove the deleted pet from the list
-        this.pets = this.pets.filter((pet) => pet.id !== id);
-
-        // Clear the model if the deleted pet was being edited
-        if (this.model.id === id) {
-          this.clearModel();
+    async editCustomer(pet) {
+      // Get Customer from Pet
+      const customer = await customer_api.getCustomerFromPet(pet);
+      customer[0].cust_since_date = customer[0].cust_since_date.replace(/T.*$/, "");
+      this.$router.push({
+        path: "/customer",
+        query: {
+          customerData: customer[0],
+          newCustomer: false
         }
-      }
+      });
     },
     clearModel() {
       this.model = {

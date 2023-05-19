@@ -71,6 +71,11 @@
                                 <md-table-cell md-label="Breed">{{ item.breed }}</md-table-cell>
                                 <md-table-cell md-label="Visual Description">{{ item.visual_desc }}</md-table-cell>
                                 <md-table-cell md-label="Allergies">{{ item.allergies }}</md-table-cell>
+                                <md-table-cell md-label="Actions">
+                                    <md-button class="md-just-icon md-simple" @click="deletePet(item.id)">
+                                        <md-icon>delete</md-icon>
+                                    </md-button>
+                                </md-table-cell>
                             </md-table-row>
                         </md-table>
                     </div>
@@ -206,14 +211,11 @@ export default {
                 const loggedGroomer = store.state.loggedGroomer;
                 this.customerData.groomer_id = loggedGroomer.email;
 
-                console.log("Create Customer" + this.newCustomer);
                 // Create the customer
                 if (this.newCustomer === 'true') {
-                    console.log("Creating Customer");
                     await api.createCustomer(this.customerData);
                 }
                 else {
-                    console.log("Updating Customer");
                     await api.updateCustomer(this.customerData.id, this.customerData);
                 }
 
@@ -246,6 +248,19 @@ export default {
                 this.customerData.groom_frequency = 'EveryOtherWeek';
             } else if (day === 'Tuesday' || day === 'FirstFriday') {
                 this.customerData.groom_frequency = 'Monthly';
+            }
+        },
+        async deletePet(id) {
+            if (confirm("Are you sure you want to delete this record?")) {
+                await pet_api.deletePet(id);
+
+                // Remove the deleted pet from the list
+                this.pets = this.pets.filter((pet) => pet.id !== id);
+
+                // Clear the model if the deleted pet was being edited
+                if (this.model.id === id) {
+                    this.clearModel();
+                }
             }
         },
     },

@@ -22,6 +22,9 @@ export default {
   getAllCustomersForGroomer(data) {
     return this.execute('post', '/groomer', data)
   },
+  getCustomerFromPet(data) {
+    return this.execute('post', '/pet', data)
+  },
   createCustomer(data) {
     return this.execute('post', '/', data)
   },

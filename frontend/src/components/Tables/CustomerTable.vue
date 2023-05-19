@@ -8,7 +8,7 @@
 
     <!-- Customer table -->
     <md-table v-model="customers" :table-header-color="tableHeaderColor">
-      <md-table-row slot="md-table-row" slot-scope="{ item }">
+      <md-table-row slot="md-table-row" slot-scope="{ item }" @click="editCustomer(item)">
         <md-table-cell md-label="Name">{{ item.customer_name }}</md-table-cell>
         <md-table-cell md-label="Email">{{ item.email }}</md-table-cell>
         <md-table-cell md-label="Contact Number">{{ item.contactno }}</md-table-cell>
@@ -16,9 +16,6 @@
         <md-table-cell md-label="Groom Day">{{ item.groom_day }}</md-table-cell>
         <md-table-cell md-label="Groom Frequency">{{ item.groom_frequency }}</md-table-cell>
         <md-table-cell md-label="Actions">
-          <md-button class="md-just-icon md-simple" @click="editCustomer(item)">
-            <md-icon>edit</md-icon>
-          </md-button>
           <md-button class="md-just-icon md-simple" @click="deleteCustomer(item.id)">
             <md-icon>delete</md-icon>
           </md-button>
